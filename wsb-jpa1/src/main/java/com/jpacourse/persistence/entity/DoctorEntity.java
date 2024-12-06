@@ -1,15 +1,7 @@
 package com.jpacourse.persistence.entity;
 
 import com.jpacourse.persistence.enums.Specialization;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "DOCTOR")
@@ -36,6 +28,11 @@ public class DoctorEntity {
 	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
 	private Specialization specialization;
+
+	// Jednokierunkowa relacja One-to-One od strony rodzica (Doctor) do dziecka (Address)
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "address_id", nullable = false)
+	private AddressEntity address;
 
 	public Long getId() {
 		return id;

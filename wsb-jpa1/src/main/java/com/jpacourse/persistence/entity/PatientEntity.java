@@ -1,13 +1,9 @@
 package com.jpacourse.persistence.entity;
 
-import java.time.LocalDate;
+import jakarta.persistence.*;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "PATIENT")
@@ -33,6 +29,15 @@ public class PatientEntity {
 
 	@Column(nullable = false)
 	private LocalDate dateOfBirth;
+
+	// Jednokierunkowa relacja One-to-One od strony rodzica (Patient) do dziecka (Address)
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "address_id", nullable = false)
+	private AddressEntity address;
+
+	// Dwukierunkowa relacja One-to-Many między Patient (rodzic) a Visit (dziecko)
+	@OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
+	private List<VisitEntity> visits;
 
 	public Long getId() {
 		return id;

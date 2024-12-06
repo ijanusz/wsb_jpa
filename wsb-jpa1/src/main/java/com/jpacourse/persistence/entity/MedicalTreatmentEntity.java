@@ -1,15 +1,9 @@
 package com.jpacourse.persistence.entity;
 
 import com.jpacourse.persistence.enums.TreatmentType;
+import jakarta.persistence.*;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import java.util.List;
 
 @Entity
 @Table(name = "MEDICAL_TREATMENT")
@@ -24,6 +18,9 @@ public class MedicalTreatmentEntity {
 
 	@Enumerated(EnumType.STRING)
 	private TreatmentType type;
+
+	@ManyToMany(mappedBy = "treatments")
+	private List<VisitEntity> visits;
 
 	public Long getId() {
 		return id;
