@@ -1,11 +1,10 @@
-
 INSERT INTO ADDRESS (id, city, address_line1, address_line2, postal_code)
 VALUES (1, 'Warszawa', 'ul. Kwiatowa 1', '', '00-001'),
        (2, 'Kraków', 'ul. Zielona 2', '', '30-002');
 
 
-INSERT INTO PATIENT (id, first_name, last_name, telephone_number, email, patient_number, date_of_birth, address_id)
-VALUES (1, 'Jan', 'Kowalski', '123456789', 'jan.kowalski@example.com', 'P001', '1980-01-01', 1);
+INSERT INTO PATIENT (id, first_name, last_name, telephone_number, email, patient_number, date_of_birth, address_id, age)
+VALUES (1, 'Jan', 'Kowalski', '123456789', 'jan.kowalski@example.com', 'P001', '1980-01-01', 1, 43);
 
 
 INSERT INTO DOCTOR (id, first_name, last_name, telephone_number, email, doctor_number, specialization, address_id)

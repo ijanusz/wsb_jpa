@@ -1,55 +1,23 @@
-package com.jpacourse.persistence.entity;
+package com.jpacourse.dto;
 
-import jakarta.persistence.*;
-
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
-@Entity
-@Table(name = "PATIENT")
-public class PatientEntity {
+public class PatientTO implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(nullable = false)
     private String firstName;
-
-    @Column(nullable = false)
     private String lastName;
-    @Column(nullable = false)
     private String telephoneNumber;
     private String email;
-    @Column(nullable = false)
     private String patientNumber;
-    @Column(nullable = false)
     private LocalDate dateOfBirth;
+
     private Integer age;
-    // Jednokierunkowa relacja One-to-One od strony rodzica (Patient) do dziecka (Address)
-    @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "address_id", nullable = false)
-    private AddressEntity address;
 
-    // Dwukierunkowa relacja One-to-Many między Patient (rodzic) a Visit (dziecko)
-    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<VisitEntity> visits;
-
-    public AddressEntity getAddress() {
-        return address;
-    }
-
-    public void setAddress(AddressEntity address) {
-        this.address = address;
-    }
-
-    public List<VisitEntity> getVisits() {
-        return visits;
-    }
-
-    public void setVisits(List<VisitEntity> visits) {
-        this.visits = visits;
-    }
+    private AddressTO address;
+    private List<VisitTO> visits;
 
     public Long getId() {
         return id;
@@ -113,5 +81,21 @@ public class PatientEntity {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    public AddressTO getAddress() {
+        return address;
+    }
+
+    public void setAddress(AddressTO address) {
+        this.address = address;
+    }
+
+    public List<VisitTO> getVisits() {
+        return visits;
+    }
+
+    public void setVisits(List<VisitTO> visits) {
+        this.visits = visits;
     }
 }
