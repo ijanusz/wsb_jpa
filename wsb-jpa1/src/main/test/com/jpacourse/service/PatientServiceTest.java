@@ -103,6 +103,16 @@ public class PatientServiceTest {
         assertThat(found.getVisits().get(0).getTime()).isEqualTo(LocalDateTime.of(2023, 10, 15, 10, 0));
     }
 
+    @Test
+    public void testFindAllVisitsForPatient() {
+        AddressEntity savedAddress = createAndSaveAddress();
+        DoctorEntity doctor = createAndSaveDoctor(savedAddress);
+        PatientTO savedPatientTO = createAndSavePatient(savedAddress);
+        createAndSaveVisit(doctor, savedPatientTO);
+
+        assertThat(patientService.findAllVisitsForPatient(savedPatientTO.getId())).hasSize(1);
+    }
+
 
     private AddressEntity createAndSaveAddress() {
         AddressTO addressTO = new AddressTO();
